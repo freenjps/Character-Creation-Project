@@ -1,6 +1,6 @@
 ﻿class Program
 {
-    public static void Main()
+    public static void Main(string[]args)
     {
      
         Console.Clear();
@@ -9,8 +9,8 @@
         Console.WriteLine("Welcome to Character Creation.");
         Console.WriteLine("==============================");
         Console.Write("Type whatever you want to begin: ");
-        Console.ReadLine();
-       
+        Console.ReadKey();
+    
         Console.Clear();
        
         // This will ask the player's name
@@ -24,29 +24,24 @@
         int playerAge = 0;
         bool validAge = false;
 
-        // Uses the while loop to keep prompting for the age until its true
+        // Uses the while loop to keep prompting for the age until its valid
         while(!validAge)
         {
 
             Console.Write("Enter your Character's Age: ");
-            string? ageEntry = Console.ReadLine();
+            string? stringAge = Console.ReadLine();
 
             // Took this from the web and read some ways to use it, it essentially takes what you input and compares it with the set int to try and convbert it
-            if(int.TryParse(ageEntry, out playerAge))
+            if(int.TryParse(stringAge, out playerAge))
             {
-              
                // If it converts it successfully it breaks out of the while loop
                validAge = true;
-
             }
             else
             {
-               
                 // If its unable to convert it, it leavs you in the loop till you enter a valid response
                 Console.WriteLine("Please enter a valid number for your age retard.");
-
             }
-
         }
      
         Console.Clear();
