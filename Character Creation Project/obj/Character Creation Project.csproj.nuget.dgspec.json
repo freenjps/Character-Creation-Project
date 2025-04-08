@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vladi\\Documents\\C#\\Character Creation Project\\Character Creation Project\\Character Creation Project.csproj": {}
+    "C:\\Users\\vladi\\Documents\\GitHub\\Character-Creation-Project\\Character Creation Project\\Character Creation Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vladi\\Documents\\C#\\Character Creation Project\\Character Creation Project\\Character Creation Project.csproj": {
+    "C:\\Users\\vladi\\Documents\\GitHub\\Character-Creation-Project\\Character Creation Project\\Character Creation Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vladi\\Documents\\C#\\Character Creation Project\\Character Creation Project\\Character Creation Project.csproj",
+        "projectUniqueName": "C:\\Users\\vladi\\Documents\\GitHub\\Character-Creation-Project\\Character Creation Project\\Character Creation Project.csproj",
         "projectName": "Character Creation Project",
-        "projectPath": "C:\\Users\\vladi\\Documents\\C#\\Character Creation Project\\Character Creation Project\\Character Creation Project.csproj",
+        "projectPath": "C:\\Users\\vladi\\Documents\\GitHub\\Character-Creation-Project\\Character Creation Project\\Character Creation Project.csproj",
         "packagesPath": "C:\\Users\\vladi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vladi\\Documents\\C#\\Character Creation Project\\Character Creation Project\\obj\\",
+        "outputPath": "C:\\Users\\vladi\\Documents\\GitHub\\Character-Creation-Project\\Character Creation Project\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

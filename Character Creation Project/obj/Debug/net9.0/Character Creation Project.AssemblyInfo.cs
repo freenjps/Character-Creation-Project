@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Character Creation Project")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f10ffc46ec683e253719698ee508801bc46d270c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Character Creation Project")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Character Creation Project")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

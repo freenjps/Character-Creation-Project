@@ -12,3 +12,18 @@ C:\Users\vladi\Documents\C#\Character Creation Project\Character Creation Projec
 C:\Users\vladi\Documents\C#\Character Creation Project\Character Creation Project\obj\Debug\net9.0\Character Creation Project.pdb
 C:\Users\vladi\Documents\C#\Character Creation Project\Character Creation Project\obj\Debug\net9.0\Character Creation Project.genruntimeconfig.cache
 C:\Users\vladi\Documents\C#\Character Creation Project\Character Creation Project\obj\Debug\net9.0\ref\Character Creation Project.dll
+C:\Users\vladi\Documents\GitHub\Character-Creation-Project\Character Creation Project\bin\Debug\net9.0\Character Creation Project.exe
+C:\Users\vladi\Documents\GitHub\Character-Creation-Project\Character Creation Project\bin\Debug\net9.0\Character Creation Project.deps.json
+C:\Users\vladi\Documents\GitHub\Character-Creation-Project\Character Creation Project\bin\Debug\net9.0\Character Creation Project.runtimeconfig.json
+C:\Users\vladi\Documents\GitHub\Character-Creation-Project\Character Creation Project\bin\Debug\net9.0\Character Creation Project.dll
+C:\Users\vladi\Documents\GitHub\Character-Creation-Project\Character Creation Project\bin\Debug\net9.0\Character Creation Project.pdb
+C:\Users\vladi\Documents\GitHub\Character-Creation-Project\Character Creation Project\obj\Debug\net9.0\Character Creation Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vladi\Documents\GitHub\Character-Creation-Project\Character Creation Project\obj\Debug\net9.0\Character Creation Project.AssemblyInfoInputs.cache
+C:\Users\vladi\Documents\GitHub\Character-Creation-Project\Character Creation Project\obj\Debug\net9.0\Character Creation Project.AssemblyInfo.cs
+C:\Users\vladi\Documents\GitHub\Character-Creation-Project\Character Creation Project\obj\Debug\net9.0\Character Creation Project.csproj.CoreCompileInputs.cache
+C:\Users\vladi\Documents\GitHub\Character-Creation-Project\Character Creation Project\obj\Debug\net9.0\Character Creation Project.sourcelink.json
+C:\Users\vladi\Documents\GitHub\Character-Creation-Project\Character Creation Project\obj\Debug\net9.0\Character Creation Project.dll
+C:\Users\vladi\Documents\GitHub\Character-Creation-Project\Character Creation Project\obj\Debug\net9.0\refint\Character Creation Project.dll
+C:\Users\vladi\Documents\GitHub\Character-Creation-Project\Character Creation Project\obj\Debug\net9.0\Character Creation Project.pdb
+C:\Users\vladi\Documents\GitHub\Character-Creation-Project\Character Creation Project\obj\Debug\net9.0\Character Creation Project.genruntimeconfig.cache
+C:\Users\vladi\Documents\GitHub\Character-Creation-Project\Character Creation Project\obj\Debug\net9.0\ref\Character Creation Project.dll
