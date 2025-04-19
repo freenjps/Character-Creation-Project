@@ -1,171 +1,58 @@
-﻿class Program
+﻿using System;
+class Program
 {
+    // Module 1-6 Main Method that runs as a Main Menu Loop for Gorgus RPG
     public static void Main(string[] args)
     {
-        // Module 5 New Welcome UI asks for the character creation or dice game
-        Console.Clear();
-        Console.WriteLine("=======Welcome to Gorgus RPG=======");
-        Console.WriteLine("\nPlease choose an option");
-        Console.WriteLine("\n1. Play Dice Game");
-        Console.WriteLine("2. Create Character");
-        Console.Write("\nChoose 1 or 2: ");
-        string choice = Console.ReadLine();
+        bool running = true;
 
-        if (choice == "1")
+        while (running)
         {
-            PlayDiceGame();
-            Console.WriteLine("\nPress any key to continue to character creation...");
-            Console.ReadKey();
-        }
+            Console.Clear();
+            Console.WriteLine("======= Welcome to Gorgus RPG =======");
+            Console.WriteLine("\nPlease choose an option:");
+            Console.WriteLine("1. Play Dice Game");
+            Console.WriteLine("2. Create Character");
+            Console.WriteLine("3. Battle Log Tracker");
+            Console.WriteLine("4. Exit");
+            Console.Write("\nChoose 1, 2, 3, or 4: ");
 
-        Console.Clear();
+            string choice = Console.ReadLine();
 
-        // This will ask the player's name
-        Console.Write("Enter your Character's Name: ");
-        string? playerName = Console.ReadLine();
-        // The last line should store whatever you put as the player's name as playerName for later
-
-        Console.Clear();
-
-        // This should work as a way to ask for players age and validate it
-        int playerAge;
-        string stringAge;
-
-        // Uses the while loop to keep prompting for the age until its valid
-        Console.Write("Enter your Character's Age: ");
-        stringAge = Console.ReadLine();
-
-        while (!int.TryParse(stringAge, out playerAge))
-        {
-            Console.WriteLine("Please enter a valid number for your age retard.");
-            stringAge = Console.ReadLine();
-        }
-
-        Console.Clear();
-
-        // This will ask for players favorite class
-        Console.Write("Enter your favorite Character Class: ");
-        string? playerFavclass = Console.ReadLine();
-        // This will store your fav class input
-
-        Console.Clear();
-
-        //Module 3 Add ons: Edited 4/8/2025 by Tom
-        // *Main changes are the elimination of the boolean validPower and the addition of the <= 0 condition within the while loops
-        // *Overall, the procedure was written well and showed use of boolean, int, and string data types. The alterations I made increase readability and reduce redundancy. 
-
-        // Ask for Combat Stats with validation
-        int attack, defense, speed; // *No need to assign zero as these values will be assigned by user later anyways.
-
-        // *Getting input for attack statistic
-            Console.Write("Enter your Attack value: ");
-            string attackString = Console.ReadLine();
-            // *While attackString cannot be parsed into an int OR attack value is less than or equal to 0, the loop prompting will continue.
-            // *Note: The order of the conditions in the while parentheses matter. It trys to parse it first, then checks if it is less than zero.
-            while (!int.TryParse(attackString, out attack) || attack <= 0)
+            switch (choice)
             {
-                Console.WriteLine("Please enter a valid number for Attack. Must be greater than 0.");
-                attackString = Console.ReadLine();
-                Console.Clear();
+                case "1":
+                    PlayDiceGame();
+                    Console.WriteLine("\nPress any key to return to main menu...");
+                    Console.ReadKey();
+                    break;
+
+                case "2":
+                    CreateCharacter();
+                    Console.WriteLine("\nPress any key to return to main menu...");
+                    Console.ReadKey();
+                    break;
+
+                case "3":
+                    RunBattleLogTracker();
+                    Console.WriteLine("\nPress any key to return to main menu...");
+                    Console.ReadKey();
+                    break;
+
+                case "4":
+                    running = false;
+                    Console.WriteLine("Thanks for playing Gorgus RPG!");
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid input. Press any key to try again.");
+                    Console.ReadKey();
+                    break;
             }
-
-        // *Getting input for defense statistic
-            Console.Write("Enter your Defense value: ");
-            string defenseString = Console.ReadLine();
-            while (!int.TryParse(defenseString, out defense) || defense <= 0)
-            {
-                Console.WriteLine("Please enter a valid number for Defense. Must be greater than 0.");
-                defenseString = Console.ReadLine();
-                Console.Clear();
-            }
-
-        // *Getting input for speed statistic
-        Console.Write("Enter your Speed value: ");
-            string speedString = Console.ReadLine();
-            while (!int.TryParse(speedString, out speed) || speed <= 0)
-            {
-                Console.WriteLine("Please enter a valid number for Attack. Must be greater than 0.");
-                speedString = Console.ReadLine();
-                Console.Clear();
-            }
-        Console.Clear();
-
-       /////// Module 4 Add ons//////
-        int gold = GetValidatedInput("Enter number of gold coins: ");
-        int silver = GetValidatedInput("Enter number of silver coins: ");
-        int copper = GetValidatedInput("Enter number of copper coins: ");
-
-        int totalCopper = ConvertToCopper(gold, silver, copper);
-        double totalGold = totalCopper / 100.0;
-        
-        // *Final notes on this section: This type of input handling works, but is repetative. 
-        // *A process like this would benefit from the creation of a standalone method which you will learn later.
-
-        Console.Clear();
-
-        // This will display all inputs made for player creation
-        Console.WriteLine("\n ============== Character Profile ============== ");
-        Console.WriteLine($"\nCharacter's Name: {playerName}");
-        Console.WriteLine($"Character's Age: {playerAge}");
-        Console.WriteLine($"Character's Favorite Class: {playerFavclass}");
-        Console.WriteLine("\n ================ Combat Stats ================= ");
-        Console.WriteLine($"\nAttack: {attack}");
-        Console.WriteLine($"Defense: {defense}");
-        Console.WriteLine($"Speed: {speed}");
-        double power = (attack * 2.0 + speed) / defense;
-        Console.WriteLine($"{playerName}'s Combat Rating is: {power:F2}");
-        Console.WriteLine("\n ================= Coin Inventory =============== ");
-        Console.WriteLine($"\nGold: {gold}, Silver: {silver}, Copper: {copper}");
-        Console.WriteLine($"Total in Copper: {totalCopper}");
-        Console.WriteLine($"Total Value in Gold: {totalGold:F2}");
-        Console.WriteLine("\n=============================================");
-        Console.WriteLine("\nPress any key to exit...");
-        Console.ReadKey();
-
-    }
-   
-    // Module 4 Made a reusable input method that validates
-    public static int GetValidatedInput(string prompt)
-    {
-        int value;
-        string input;
-
-        Console.Write(prompt);
-        input = Console.ReadLine();
-
-        while (!int.TryParse(input, out value) || value < 0)
-        {
-            Console.WriteLine("Please enter a valid non-negative number.");
-            Console.Write(prompt);
-            input = Console.ReadLine();
         }
-
-        return value;
     }
 
-    // Module 4 Made this method to convert all coins to total copper
-    public static int ConvertToCopper(int gold, int silver, int copper)
-    {
-        return gold * 100 + silver * 10 + copper;
-    }
-
-    // Module 5 adds methods for the dice roll mini game
-    public static int RollD6()
-    {
-        return new Random().Next(1, 7);
-    }
-
-    public static int RollD20()
-    {
-        return new Random().Next(1, 21);
-    }
-
-    public static int RollCustom(int sides)
-    {
-        return new Random().Next(1, sides + 1);
-    }
-
-    // Module 5 This is the method for the actual dice game
+    // Module 5: Dice Game Method
     public static void PlayDiceGame()
     {
         Console.Clear();
@@ -217,4 +104,179 @@
             }
         }
     }
+
+
+    // Method for Dice 6
+    public static int RollD6()
+    {
+        return new Random().Next(1, 7);
+    }
+
+    // Method for Dice 20
+    public static int RollD20()
+    {
+        return new Random().Next(1, 21);
+    }
+
+    // Method for Custom Dice
+    public static int RollCustom(int sides)
+    {
+        return new Random().Next(1, sides + 1);
+    }
+
+
+    // Module 2-4: Character Creation, Charcter Stats, and Coin Inventory Method
+    public static void CreateCharacter()
+    {
+        Console.Clear();
+        Console.Write("Enter your Character's Name: ");
+        string? playerName = Console.ReadLine();
+
+        Console.Clear();
+        int playerAge;
+        Console.Write("Enter your Character's Age: ");
+        string stringAge = Console.ReadLine();
+
+        while (!int.TryParse(stringAge, out playerAge))
+        {
+            Console.WriteLine("Please enter a valid number for your age.");
+            stringAge = Console.ReadLine();
+        }
+
+        Console.Clear();
+        Console.Write("Enter your favorite Character Class: ");
+        string? playerFavclass = Console.ReadLine();
+
+        Console.Clear();
+
+        int attack, defense, speed;
+
+        Console.Write("Enter your Attack value: ");
+        string attackString = Console.ReadLine();
+        while (!int.TryParse(attackString, out attack) || attack <= 0)
+        {
+            Console.WriteLine("Please enter a valid number for Attack. Must be greater than 0.");
+            attackString = Console.ReadLine();
+            Console.Clear();
+        }
+
+        Console.Write("Enter your Defense value: ");
+        string defenseString = Console.ReadLine();
+        while (!int.TryParse(defenseString, out defense) || defense <= 0)
+        {
+            Console.WriteLine("Please enter a valid number for Defense. Must be greater than 0.");
+            defenseString = Console.ReadLine();
+            Console.Clear();
+        }
+
+        Console.Write("Enter your Speed value: ");
+        string speedString = Console.ReadLine();
+        while (!int.TryParse(speedString, out speed) || speed <= 0)
+        {
+            Console.WriteLine("Please enter a valid number for Speed. Must be greater than 0.");
+            speedString = Console.ReadLine();
+            Console.Clear();
+        }
+
+        Console.Clear();
+        int gold = GetValidatedInput("Enter number of gold coins: ");
+        int silver = GetValidatedInput("Enter number of silver coins: ");
+        int copper = GetValidatedInput("Enter number of copper coins: ");
+        int totalCopper = ConvertToCopper(gold, silver, copper);
+        double totalGold = totalCopper / 100.0;
+
+        Console.Clear();
+        Console.WriteLine("\n ============== Character Profile ============== ");
+        Console.WriteLine($"\nCharacter's Name: {playerName}");
+        Console.WriteLine($"Character's Age: {playerAge}");
+        Console.WriteLine($"Character's Favorite Class: {playerFavclass}");
+        Console.WriteLine("\n ================ Combat Stats ================= ");
+        Console.WriteLine($"\nAttack: {attack}");
+        Console.WriteLine($"Defense: {defense}");
+        Console.WriteLine($"Speed: {speed}");
+        double power = (attack * 2.0 + speed) / defense;
+        Console.WriteLine($"{playerName}'s Combat Rating is: {power:F2}");
+        Console.WriteLine("\n ================= Coin Inventory =============== ");
+        Console.WriteLine($"\nGold: {gold}, Silver: {silver}, Copper: {copper}");
+        Console.WriteLine($"Total in Copper: {totalCopper}");
+        Console.WriteLine($"Total Value in Gold: {totalGold:F2}");
+        Console.WriteLine("\n=============================================");
+    }
+
+    // Module 4: Valid Coin Input Method
+    public static int GetValidatedInput(string prompt)
+    {
+        int value;
+        string input;
+
+        Console.Write(prompt);
+        input = Console.ReadLine();
+
+        while (!int.TryParse(input, out value) || value < 0)
+        {
+            Console.WriteLine("Please enter a valid non-negative number.");
+            Console.Write(prompt);
+            input = Console.ReadLine();
+        }
+
+        return value;
+    }
+
+    // Coin conversion method
+    public static int ConvertToCopper(int gold, int silver, int copper)
+    {
+        return gold * 100 + silver * 10 + copper;
+    }
+
+    // Module 6: Battle Log Tracker Method
+    public static void RunBattleLogTracker()
+    {
+        Console.Clear();
+        Console.WriteLine("======= Battle Log Tracker =======");
+
+        Console.Write("Enter number of turns (up to 10): ");
+        int turns;
+        while (!int.TryParse(Console.ReadLine(), out turns) || turns <= 0 || turns > 10)
+        {
+            Console.WriteLine("Please enter a valid number of turns (1–10).");
+        }
+
+        int[] damagePerTurn = new int[turns];
+
+        for (int i = 0; i < turns; i++)
+        {
+            Console.Write($"Enter damage for Turn {i + 1}: ");
+            while (!int.TryParse(Console.ReadLine(), out damagePerTurn[i]) || damagePerTurn[i] < 0)
+            {
+                Console.WriteLine("Please enter a valid non-negative number.");
+            }
+        }
+
+        int totalDamage = 0;
+        int highestDamage = 0;
+
+        for (int i = 0; i < turns; i++)
+        {
+            totalDamage += damagePerTurn[i];
+            if (damagePerTurn[i] > highestDamage)
+            {
+                highestDamage = damagePerTurn[i];
+            }
+        }
+
+            double averageDamage = (double)totalDamage / turns;
+
+            Console.Clear();
+            Console.WriteLine("\n--- Combat Summary ---");
+            for (int i = 0; i < turns; i++)
+            {
+                Console.WriteLine($"Turn {i + 1}: {damagePerTurn[i]} DMG");
+            }
+
+            Console.WriteLine($"\nTotal Damage: {totalDamage}");
+            Console.WriteLine($"Average Damage: {averageDamage:F1}");
+            Console.WriteLine($"Highest Damage: {highestDamage}");
+    
+    }
 }
+
