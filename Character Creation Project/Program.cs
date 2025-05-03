@@ -1,21 +1,27 @@
 ﻿using System;
+using System.IO;
 class Program
 {
-    // Module 1-6 Main Method that runs as a Main Menu Loop for Gorgus RPG
+    // Module 1-8 Main Method that runs as a Main Menu Loop for Gorgus RPG
     public static void Main(string[] args)
     {
+        // Module 7 Ability to choose difficulty before Main Menu 
+        int gameDifficulty = ChooseDifficulty();
+        
         bool running = true;
 
         while (running)
         {
             Console.Clear();
             Console.WriteLine("======= Welcome to Gorgus RPG =======");
+            Console.WriteLine($"Current Difficulty: {(gameDifficulty == 1 ? "Easy" : gameDifficulty == 2 ? "Medium" : "Hard")}");
             Console.WriteLine("\nPlease choose an option:");
             Console.WriteLine("1. Play Dice Game");
             Console.WriteLine("2. Create Character");
             Console.WriteLine("3. Battle Log Tracker");
+            Console.WriteLine("4. Save Character Profile to File");
             Console.WriteLine("4. Exit");
-            Console.Write("\nChoose 1, 2, 3, or 4: ");
+            Console.Write("\nChoose 1, 2, 3, 4, or 5: ");
 
             string choice = Console.ReadLine();
 
@@ -39,7 +45,13 @@ class Program
                     Console.ReadKey();
                     break;
 
-                case "4":
+                 case "4":
+                    CreateClassProfile(); 
+                    Console.WriteLine("\nPress any key to return to main menu...");
+                    Console.ReadKey();
+                    break;
+                
+                case "5":
                     running = false;
                     Console.WriteLine("Thanks for playing Gorgus RPG!");
                     break;
@@ -50,6 +62,48 @@ class Program
                     break;
             }
         }
+    }
+
+     // Module 7 Difficulty selection method
+    public static int ChooseDifficulty()
+    {
+        int difficulty = 0;
+        bool valid = false;
+
+        while (!valid)
+        {
+            Console.Clear();
+            Console.WriteLine("===== Select Game Difficulty =====");
+            Console.WriteLine("1. Easy");
+            Console.WriteLine("2. Medium");
+            Console.WriteLine("3. Hard");
+            Console.Write("Enter a number (1–3): ");
+
+            try
+            {
+                string input = Console.ReadLine();
+                difficulty = int.Parse(input);
+
+                if (difficulty >= 1 && difficulty <= 3)
+                {
+                    valid = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid choice. Please choose between 1 and 3.");
+                    Console.WriteLine("Press any key to try again...");
+                    Console.ReadKey();
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("That wasn't a number. Please enter a numeric value.");
+                Console.WriteLine("Press any key to try again...");
+                Console.ReadKey();
+            }
+        }
+
+        return difficulty;
     }
 
     // Module 5: Dice Game Method
@@ -278,5 +332,61 @@ class Program
             Console.WriteLine($"Highest Damage: {highestDamage}");
     
     }
+
+    // Module 8 Creating and Saving Character Profile
+    public static void CreateClassProfile()
+    
+    {
+        Console.Clear();
+        Console.WriteLine("===== Create and Save Character Profile =====");
+
+        // Get name
+        Console.Write("Enter your character's name: ");
+        string name = Console.ReadLine();
+
+        // Get class
+        Console.Write("Enter your class (Warrior, Mage, Rogue): ");
+        string charClass = Console.ReadLine();
+        string classDescription = "";
+
+        // Use switch to assign description
+        switch (charClass.ToLower())
+        
+        {
+            case "warrior":
+                classDescription = "A strong melee fighter with high endurance.";
+                break;
+            case "mage":
+                classDescription = "A master of elemental magic and ranged spells.";
+                break;
+            case "assassin":
+                classDescription = "A stealthy assassin who excels at critical hits.";
+                break;
+            default:
+                classDescription = "An adventurer with a mysterious background.";
+                break;
+        }
+
+        // Get level
+        int level;
+        Console.Write("Enter your level: ");
+        while (!int.TryParse(Console.ReadLine(), out level) || level <= 0)
+        
+        {
+            Console.Write("Please enter a valid positive number for level: ");
+        }
+
+        // Build profile text
+        string profile = $"Character Name: {name}\nClass: {charClass}\nLevel: {level}\nDescription: {classDescription}";
+
+        // Save to file
+        string fileName = "CharacterProfile.txt";
+        File.WriteAllText(fileName, profile);
+
+        Console.WriteLine($"\n✅ Profile saved to '{fileName}'!");
+    
+    }
+
 }
+
 
