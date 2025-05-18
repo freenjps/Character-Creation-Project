@@ -1,8 +1,62 @@
 ﻿using System;
 using System.IO;
+
+//Module 9 - Adding struct for new enemies
+public struct Enemy
+{
+    public string Name;
+    public int HP;
+    public int Damage;
+
+    public Enemy(string name, int hp, int damage)
+    {
+        Name = name;
+        HP = hp;
+        Damage = damage;
+    }
+}
+
+//Module 10 - Adding item struct
+public struct Item
+{
+    public string Type;
+    public int Value;
+    public string Rarity;
+
+    public Item(string type, int value, string rarity)
+    {
+        Type = type;
+        Value = value;
+        Rarity = rarity;
+    }
+}
+
+//Module 11 - Make Character Class
+public class Character
+{
+    public static int CharacterCount = 0;
+
+    public int HP;
+    public string ClassType;
+
+    public Character(int hp, string classType)
+    {
+        HP = hp;
+        ClassType = classType;
+
+        // Increment counter when a new character is created
+        CharacterCount++;
+    }
+
+    public void DisplayInfo()
+    {
+        Console.WriteLine($"Class: {ClassType}, HP: {HP}");
+    }
+}
+
 class Program
 {
-    // Module 1-8 Main Method that runs as a Main Menu Loop for Gorgus RPG
+    // Module 1-11 Main Method that runs as a Main Menu Loop for Gorgus RPG
     public static void Main(string[] args)
     {
         // Module 7 Ability to choose difficulty before Main Menu 
@@ -20,42 +74,34 @@ class Program
             Console.WriteLine("2. Create Character");
             Console.WriteLine("3. Battle Log Tracker");
             Console.WriteLine("4. Save Character Profile to File");
-            Console.WriteLine("4. Exit");
-            Console.Write("\nChoose 1, 2, 3, 4, or 5: ");
+            Console.WriteLine("5. View Enemies");
+            Console.WriteLine("6. View Inventory");
+            Console.WriteLine("7. Create Character with Counter");
+            Console.WriteLine("8. Exit");
 
             string choice = Console.ReadLine();
+
 
             switch (choice)
             {
                 case "1":
-                    PlayDiceGame();
-                    Console.WriteLine("\nPress any key to return to main menu...");
-                    Console.ReadKey();
-                    break;
-
+                    PlayDiceGame(); break;
                 case "2":
-                    CreateCharacter();
-                    Console.WriteLine("\nPress any key to return to main menu...");
-                    Console.ReadKey();
-                    break;
-
+                    CreateCharacter(); break;
                 case "3":
-                    RunBattleLogTracker();
-                    Console.WriteLine("\nPress any key to return to main menu...");
-                    Console.ReadKey();
-                    break;
-
-                 case "4":
-                    CreateClassProfile(); 
-                    Console.WriteLine("\nPress any key to return to main menu...");
-                    Console.ReadKey();
-                    break;
-                
+                    RunBattleLogTracker(); break;
+                case "4":
+                    CreateClassProfile(); break;
                 case "5":
+                    ShowEnemies(); break;
+                case "6":
+                    ShowInventory(); break;
+                case "7":
+                    CreateCharacterWithCounter(); break;
+                case "8":
                     running = false;
-                    Console.WriteLine("Thanks for playing Gorgus RPG!");
+                    Console.WriteLine("Thanks for playing Gorgus RPG!");   
                     break;
-
                 default:
                     Console.WriteLine("Invalid input. Press any key to try again.");
                     Console.ReadKey();
@@ -63,6 +109,16 @@ class Program
             }
         }
     }
+
+    // Module 10 - added a fixed array of 5 items
+    static Item[] inventory = new Item[5]
+    {
+        new Item("Sword", 150, "Rare"),
+        new Item("Potion", 25, "Common"),
+        new Item("Shield", 100, "Uncommon"),
+        new Item("Gemstone", 500, "Legendary"),
+        new Item("Herbs", 15, "Common")
+    };
 
      // Module 7 Difficulty selection method
     public static int ChooseDifficulty()
@@ -110,7 +166,7 @@ class Program
     public static void PlayDiceGame()
     {
         Console.Clear();
-        Console.WriteLine("🎲 Dice Rolling Game 🎲");
+        Console.WriteLine(" Dice Rolling Game ");
 
         bool validChoice = false;
 
@@ -340,16 +396,16 @@ class Program
         Console.Clear();
         Console.WriteLine("===== Create and Save Character Profile =====");
 
-        // Get name
+        
         Console.Write("Enter your character's name: ");
         string name = Console.ReadLine();
 
-        // Get class
-        Console.Write("Enter your class (Warrior, Mage, Rogue): ");
+        
+        Console.Write("Enter your class (Warrior, Mage, Assassin): ");
         string charClass = Console.ReadLine();
         string classDescription = "";
 
-        // Use switch to assign description
+        
         switch (charClass.ToLower())
         
         {
@@ -367,7 +423,6 @@ class Program
                 break;
         }
 
-        // Get level
         int level;
         Console.Write("Enter your level: ");
         while (!int.TryParse(Console.ReadLine(), out level) || level <= 0)
@@ -376,17 +431,88 @@ class Program
             Console.Write("Please enter a valid positive number for level: ");
         }
 
-        // Build profile text
+        
         string profile = $"Character Name: {name}\nClass: {charClass}\nLevel: {level}\nDescription: {classDescription}";
 
-        // Save to file
+       
         string fileName = "CharacterProfile.txt";
         File.WriteAllText(fileName, profile);
 
-        Console.WriteLine($"\n✅ Profile saved to '{fileName}'!");
+        Console.WriteLine($"\n Profile saved to '{fileName}'!");
     
     }
 
+    //Module 9 - Public class for enemies
+    public static void ShowEnemies()
+    {
+        Console.Clear();
+        Console.WriteLine("===== Enemy Battle Info =====");
+
+        Enemy[] enemies = new Enemy[]
+        {
+            new Enemy("Orc Warrior", 100, 15),
+            new Enemy("Goblin Thief", 60, 10),
+            new Enemy("Fire Wyvern", 250, 40)
+        };
+
+        foreach (Enemy enemy in enemies)
+        {
+            Console.WriteLine($"\nEnemy: {enemy.Name}");
+            Console.WriteLine($" - HP: {enemy.HP}");
+            Console.WriteLine($" - Damage: {enemy.Damage}");
+        }
+
+        Console.WriteLine("\nPress any key to return to the main menu...");
+        Console.ReadKey();
+
+    }
+    
+    //Module 10 - Method to print inventory
+    public static void ShowInventory()
+    {
+        Console.Clear();
+        Console.WriteLine("===== Player Inventory =====");
+
+        for (int i = 0; i < inventory.Length; i++)
+        {
+                Item item = inventory[i];
+                Console.WriteLine($"\nSlot {i + 1}:");
+                Console.WriteLine($" - Type: {item.Type}");
+                Console.WriteLine($" - Value: {item.Value} gold");
+                Console.WriteLine($" - Rarity: {item.Rarity}");
+        }
+
+        Console.WriteLine("\nPress any key to return to the main menu...");
+        Console.ReadKey();
+    }
+
+    // Module 11 - Create Character Method
+    public static void CreateCharacterWithCounter()
+    {
+        Console.Clear();
+        Console.WriteLine("===== Create a New Character =====");
+
+        Console.Write("Enter class type (e.g., Warrior, Mage): ");
+        string classType = Console.ReadLine();
+
+        int hp;
+        Console.Write("Enter starting HP: ");
+        while (!int.TryParse(Console.ReadLine(), out hp) || hp <= 0)
+        {
+            Console.Write("Please enter a valid positive number for HP: ");
+        }
+
+        // Create the character
+        Character newChar = new Character(hp, classType);
+
+        Console.WriteLine("\n !!Character created successfully!!");
+        newChar.DisplayInfo();
+
+        Console.WriteLine($"\nTotal characters created: {Character.CharacterCount}");
+
+        Console.WriteLine("\nPress any key to return to the main menu...");
+        Console.ReadKey();
+    }
 }
 
 
